@@ -22,7 +22,9 @@ jobs:
       - checkout
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
-      - run: sudo docker-php-ext-install zip gd
+      - run: sudo docker-php-ext-install zip
+      - run: sudo docker-php-ext-configure gd --with-freetype --with-jpeg
+      - run: sudo docker-php-ext-install -j$(nproc) gd
       - run: echo 'memory_limit = -1' | sudo tee -a /usr/local/etc/php/conf.d/docker-php-memlimit.ini
 
       # Download and cache dependencies
